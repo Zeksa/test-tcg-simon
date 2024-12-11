@@ -1,7 +1,7 @@
 import { HttpsError, onRequest } from 'firebase-functions/https'
-import { cardsCollection } from './collections'
-import { PROVIDERS } from './common/globalData'
-import { cardsNormalizers } from './utils/cardsNormalizers'
+import { cardsCollection } from '../collections'
+import { PROVIDERS } from '../common/globalData'
+import { cardsNormalizers } from '../utils/cardsNormalizers'
 
 export const addCards = onRequest(
   { minInstances: 0, maxInstances: 1, timeoutSeconds: 540 },
@@ -25,20 +25,26 @@ export const addCards = onRequest(
     }
 
     // Read json from uri
+    let cards
     try {
       const jsonFetch = await fetch(request.body.jsonUrl)
-      const cards = await jsonFetch.json()
+      cards = await jsonFetch.json()
 
       if (!Array.isArray(cards)) {
-        throw new Error()
+        throw new Error('The JSON data is invalid.')
       }
+    } catch (error) {
+      console.error(error)
+      throw new HttpsError('invalid-argument', 'The JSON URL or data is invalid.')
+    }
 
-      // Normalize cards
+    try {
       const normalizedCards = cards.map(cardsNormalizers[provider])
       const promises = normalizedCards.map(card => cardsCollection.doc(card.id).set(card))
       await Promise.all(promises)
     } catch (error) {
-      throw new HttpsError('invalid-argument', 'The JSON URL is invalid.')
+      console.error(error)
+      throw new HttpsError('internal', 'An error occurred while adding the cards.')
     }
 
     response.send({ status: 'ok' })

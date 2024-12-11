@@ -1,7 +1,9 @@
 import { LORCANA_CARD_RARITY_MAP, MTG_CARD_RARITY_MAP } from '../common/globalData'
 
 const filterName = (name: string): string => {
-  return name.replace(/\\/g, '')
+  const nameWithoutProhibitedCharacters = name.replace(/\\|"/g, '')
+  const nameWithoutMultipleSpaces = nameWithoutProhibitedCharacters.replace(/\s+/g, ' ')
+  return nameWithoutMultipleSpaces.trim()
 }
 
 const getNameWordsFromName = (name: string): string[] => {
@@ -22,26 +24,33 @@ const getNameWordsFromName = (name: string): string[] => {
 }
 
 const common = (card: MtgCard | LorcanaCard) => {
+  const name = filterName(card.name)
   return {
-    name: filterName(card.name),
-    nameWords: getNameWordsFromName(card.name),
+    name,
+    nameWords: getNameWordsFromName(name),
   }
 }
 
 const mtg = (card: MtgCard): Card => {
+  const provider: Provider = 'mtg'
+
   return {
-    id: `mtg-${card.id}`,
+    id: `${provider}-${card.id}`,
     rarity: MTG_CARD_RARITY_MAP[card.rarity],
     color: card.color,
+    provider,
     ...common(card),
   }
 }
 
 const lorcana = (card: LorcanaCard): Card => {
+  const provider: Provider = 'lorcana'
+
   return {
-    id: `lorcana-${card.id}`,
+    id: `${provider}-${card.id}`,
     rarity: LORCANA_CARD_RARITY_MAP[card.rarity],
     inkCost: card.ink_cost,
+    provider,
     ...common(card),
   }
 }

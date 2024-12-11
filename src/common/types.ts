@@ -12,7 +12,7 @@ declare global {
     id: string
     name: string
     rarity: MtgCardRarity
-    color: MtgCardColor
+    color?: MtgCardColor
   }
 
   type LorcanaCardRarity = (typeof LORCANA_CARD_RARITY)[number]
@@ -29,6 +29,7 @@ declare global {
     name: string
     rarity: CardRarity
     nameWords: string[]
+    provider: Provider
     color?: CardColor
     inkCost?: number
   }

@@ -9,6 +9,7 @@ if (!getApps().length) {
 
 setGlobalOptions({ region: 'europe-west1' })
 
-import { addCards } from './addCards'
+import { addCards } from './functions/addCards'
+import { getCards } from './functions/getCards'
 
-export { addCards }
+export { addCards, getCards }
