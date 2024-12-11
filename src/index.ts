@@ -7,7 +7,7 @@ if (!getApps().length) {
   })
 }
 
-setGlobalOptions({ region: 'europe-west1' })
+setGlobalOptions({ region: 'europe-west1', timeoutSeconds: 540 })
 
 import { addCards } from './functions/addCards'
 import { getCards } from './functions/getCards'

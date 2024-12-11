@@ -1,13 +1,13 @@
 import { LORCANA_CARD_RARITY_MAP, MTG_CARD_RARITY_MAP } from '../common/globalData'
 
-const filterName = (name: string): string => {
+export const filterName = (name: string): string => {
   const nameWithoutProhibitedCharacters = name.replace(/\\|"/g, '')
   const nameWithoutMultipleSpaces = nameWithoutProhibitedCharacters.replace(/\s+/g, ' ')
   return nameWithoutMultipleSpaces.trim()
 }
 
-const getNameWordsFromName = (name: string): string[] => {
-  const words = name.toLowerCase().split(' ')
+export const getNameWordsFromName = (name: string): string[] => {
+  const words = filterName(name).toLowerCase().split(' ')
 
   // For longer words, we will split them into smaller words
   const result: string[] = []
@@ -24,10 +24,9 @@ const getNameWordsFromName = (name: string): string[] => {
 }
 
 const common = (card: MtgCard | LorcanaCard) => {
-  const name = filterName(card.name)
   return {
-    name,
-    nameWords: getNameWordsFromName(name),
+    name: filterName(card.name),
+    nameWords: getNameWordsFromName(card.name),
   }
 }
 
