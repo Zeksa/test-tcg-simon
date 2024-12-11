@@ -6,7 +6,7 @@
 
 ## Public endpoints
 
-### 1. Add carts
+### 1. Add carts (Not configured to scale as this is mostly admin)
 
 **POST**  
 `https://europe-west1-test-tcg.cloudfunctions.net/addCards`
@@ -19,6 +19,8 @@
   "jsonUrl": "https://cardnexus-hiring-docs.s3.eu-west-1.amazonaws.com/mtg-cards.json"
 }
 ```
+
+### 2. Get cards (Configured to scale)
 
 **GET**
 `https://europe-west1-test-tcg.cloudfunctions.net/getCards`
