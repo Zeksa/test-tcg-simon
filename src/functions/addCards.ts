@@ -4,6 +4,8 @@ import { PROVIDERS } from '../common/globalData'
 import { cardsNormalizers } from '../utils/cardsNormalizers'
 
 export const addCards = onRequest({ minInstances: 0, maxInstances: 1 }, async (request, response) => {
+  // In production, we would check for permissions first
+
   if (!request.body || typeof request.body !== 'object') {
     throw new HttpsError('invalid-argument', 'The request data is invalid.')
   }

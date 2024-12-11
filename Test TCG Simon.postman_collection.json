@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "53b716ca-716f-4490-ac95-585766e7c47e",
+		"name": "Test TCG Simon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4332710"
+	},
+	"item": [
+		{
+			"name": "Get Cards",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://europe-west1-test-tcg.cloudfunctions.net/getCards?rarity=common&name=andon&rarity=uncommon",
+					"protocol": "https",
+					"host": [
+						"europe-west1-test-tcg",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"getCards"
+					],
+					"query": [
+						{
+							"key": "color",
+							"value": "R",
+							"disabled": true
+						},
+						{
+							"key": "rarity",
+							"value": "common"
+						},
+						{
+							"key": "name",
+							"value": "andon"
+						},
+						{
+							"key": "provider",
+							"value": "lorcana",
+							"disabled": true
+						},
+						{
+							"key": "inkCostMin",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "inkCostMax",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "rarity",
+							"value": "uncommon"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Cards",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"provider\": \"mtg\",\r\n    \"jsonUrl\": \"https://cardnexus-hiring-docs.s3.eu-west-1.amazonaws.com/mtg-cards.json\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://europe-west1-test-tcg.cloudfunctions.net/addCards",
+					"protocol": "https",
+					"host": [
+						"europe-west1-test-tcg",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"addCards"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

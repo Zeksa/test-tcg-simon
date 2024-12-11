@@ -7,7 +7,8 @@ export const getCards = onRequest(
   { minInstances: 1, maxInstances: 100, concurrency: 200 },
   async (request, response) => {
     const { name, rarity, color, inkCostMin, inkCostMax, provider } = request.query
-    // TODO: check data
+
+    // TODO: We should check the query data
 
     let query: Query<Card, DocumentData> = cardsCollection
 
