@@ -1,6 +1,5 @@
 {
   "name": "test-tcg",
-  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "start": "yarn run build && firebase emulators:start --only functions",
