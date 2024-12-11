@@ -1,0 +1,30 @@
+{
+  "name": "test-tcg",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "yarn run build && firebase emulators:start --only functions",
+    "build": "tsc",
+    "deploy": "firebase deploy --only functions",
+    "prettier": "prettier --ignore-path ../.gitignore --write .",
+    "lint": "eslint . --fix",
+    "tscheck": "tsc --noEmit",
+    "check": "yarn run prettier && yarn run lint && yarn run tscheck"
+  },
+  "dependencies": {
+    "firebase": "^11.0.2",
+    "firebase-admin": "^13.0.1",
+    "firebase-functions": "^6.1.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "eslint": "^9.16.0",
+    "eslint-plugin-sort-destructure-keys": "^2.0.0",
+    "eslint-plugin-typescript-sort-keys": "^3.3.0",
+    "firebase-tools": "^13.28.0",
+    "globals": "^15.13.0",
+    "prettier": "^3.4.1",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,6 @@
+.env
+dist/
+*.cache
+*.log
+node_modules/
+*.tsbuildinfo
